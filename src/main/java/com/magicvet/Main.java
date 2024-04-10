@@ -8,6 +8,7 @@ public class Main {
     static String PASSWORD = "default";
     static Scanner SCANNER = new Scanner(System.in);
     static String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    static String NAME_PATTERN = "^[a-zA-Z\\-]{3,}$";
     public static void main(String[] args) {
         run();
     }
@@ -34,21 +35,39 @@ public class Main {
         Client client = new Client();
         client.email = email;
 
+        String firstName;
         System.out.print("First name: ");
-        client.firstName = SCANNER.nextLine();
+        do{
+            firstName = SCANNER.nextLine();
+            if(isNameValid(firstName)) System.out.print("First name is invalid. Try again.\nFirst name: ");
+        } while (isNameValid(firstName));
+        client.firstName = firstName;
 
         System.out.print("Last name: ");
         client.lastName = SCANNER.nextLine();
 
+        String lastName;
+        System.out.print("Last name: ");
+        do{
+            lastName = SCANNER.nextLine();
+            if(isNameValid(lastName)) System.out.print("Last name is invalid. Try again.\nLast name: ");
+        } while (isNameValid(lastName));
+        client.lastName = lastName;
+
         return client;
     }
 
-    private static boolean isEmailValid(String email) {
+    static boolean isEmailValid(String email) {
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
+    static boolean isNameValid(String name) {
+        Pattern pattern = Pattern.compile(NAME_PATTERN);
+        Matcher matcher = pattern.matcher(name);
+        return !matcher.matches();
+    }
 
     static boolean auth(){
         boolean accepted = false;
@@ -63,7 +82,7 @@ public class Main {
                 System.out.println("Access denied. Please check your password.");
             }
         }
-        System.out.println(accepted ? "Welcome to Magic Veti!" : "Application has been blocked");
+        System.out.println(accepted ? "Welcome to Magic Vet!" : "Application has been blocked");
         return accepted;
     }
 
