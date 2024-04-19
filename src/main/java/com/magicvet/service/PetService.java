@@ -7,16 +7,16 @@ import main.java.com.magicvet.model.Pet;
 public class PetService {
     private static final String DOG_TYPE = "dog";
 
-    public Pet registerNewPet(){
+    public Pet registerNewPet() {
         Pet pet = new Pet();
         System.out.println("Type (dog / cat / other): ");
 
         String type = Main.SCANNER.nextLine();
         pet.setType(type);
 
-        if(DOG_TYPE.equals(type)){
+        if (DOG_TYPE.equals(type)) {
             pet = buildDog();
-        } else{
+        } else {
             pet = builPet(type);
         }
         return pet;

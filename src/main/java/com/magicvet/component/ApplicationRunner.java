@@ -7,26 +7,27 @@ import main.java.com.magicvet.service.ClientService;
 import main.java.com.magicvet.service.PetService;
 
 public class ApplicationRunner {
-    private ClientService clientService = new ClientService();
-    private PetService petService = new PetService();
-    public void run(){
-        if(Authenticator.auth()){
-           Client client = clientService.registerNewClient();
+    private final ClientService clientService = new ClientService();
+    private final PetService petService = new PetService();
 
-           if(client !=null){
-               System.out.println("Do you want to add a pet? (yes / no)");
-               String addPet = Main.SCANNER.nextLine();
-               boolean toAddPet = addPet.equals("yes");
+    public void run() {
+        if (Authenticator.auth()) {
+            Client client = clientService.registerNewClient();
 
-               if (toAddPet) {
-                   System.out.println("Adding a new pet.");
+            if (client != null) {
+                System.out.println("Do you want to add a pet? (yes / no)");
+                String addPet = Main.SCANNER.nextLine();
+                boolean toAddPet = addPet.equals("yes");
 
-                   Pet pet = petService.registerNewPet();
-                   client.setPet(pet);
-                   pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
-                   System.out.println("Pet has been added.");
-               }
-           }
+                if (toAddPet) {
+                    System.out.println("Adding a new pet.");
+
+                    Pet pet = petService.registerNewPet();
+                    client.setPet(pet);
+                    pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
+                    System.out.println("Pet has been added.");
+                }
+            }
         }
     }
 }
