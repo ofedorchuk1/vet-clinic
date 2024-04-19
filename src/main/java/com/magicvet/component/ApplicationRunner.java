@@ -1,5 +1,6 @@
 package main.java.com.magicvet.component;
 
+import main.java.com.magicvet.Main;
 import main.java.com.magicvet.model.Client;
 import main.java.com.magicvet.model.Pet;
 import main.java.com.magicvet.service.ClientService;
@@ -13,12 +14,18 @@ public class ApplicationRunner {
            Client client = clientService.registerNewClient();
 
            if(client !=null){
-               System.out.println("Adding a new pet.");
+               System.out.println("Do you want to add a pet? (yes / no)");
+               String addPet = Main.SCANNER.nextLine();
+               boolean toAddPet = addPet.equals("yes");
 
-               Pet pet = petService.registerNewPet();
-               client.setPet(pet);
-               pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
-               System.out.println("Pet has been added.");
+               if (toAddPet) {
+                   System.out.println("Adding a new pet.");
+
+                   Pet pet = petService.registerNewPet();
+                   client.setPet(pet);
+                   pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
+                   System.out.println("Pet has been added.");
+               }
            }
         }
     }
