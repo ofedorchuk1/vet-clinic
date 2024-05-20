@@ -9,7 +9,7 @@ public class PetService {
 
     public Pet registerNewPet() {
         Pet pet = new Pet();
-        System.out.println("Type (dog / cat / other): ");
+        System.out.print("Type (dog / cat / other): ");
 
         String type = Main.SCANNER.nextLine();
         pet.setType(type);
@@ -31,7 +31,7 @@ public class PetService {
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
 
-        System.out.print("Sex (male / female: ");
+        System.out.print("Sex (male / female): ");
         pet.setSex(Main.SCANNER.nextLine());
 
 

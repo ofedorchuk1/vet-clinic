@@ -15,7 +15,7 @@ public class ApplicationRunner {
             Client client = clientService.registerNewClient();
 
             if (client != null) {
-                System.out.println("Do you want to add a pet? (yes / no)");
+                System.out.print("Do you want to add a pet? (yes / no)");
                 String addPet = Main.SCANNER.nextLine();
                 boolean toAddPet = addPet.equals("yes");
 
@@ -27,6 +27,7 @@ public class ApplicationRunner {
                     pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
                     System.out.println("Pet has been added.");
                 }
+                System.out.println(client);
             }
         }
     }
