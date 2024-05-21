@@ -8,8 +8,10 @@ public class Dog extends Pet{
     public Dog(){
 
     }
-    public Dog(Size size){
+    public Dog(Size size, HealthState healthState){
+        super();
         this.size = size;
+        this.setHealthState(healthState);
     }
     public Size getSize() {
         return size;

@@ -8,10 +8,7 @@ public abstract class Pet {
     private String age;
     private String name;
     private String ownerName;
-    public Pet(){}
-    public Pet(String age){
-        this.age = age;
-    }
+    private HealthState healthState;
 
     public String getType() {
         return type;
@@ -79,5 +76,30 @@ public abstract class Pet {
     @Override
     public int hashCode() {
         return Objects.hash(type, sex, age, name, ownerName);
+    }
+
+    public HealthState getHealthState() {
+        return healthState;
+    }
+
+    public void setHealthState(HealthState healthState) {
+        this.healthState = healthState;
+    }
+
+    public enum HealthState {
+        EXCELLENT(5),
+        GOOD(4),
+        FAIR(3),
+        POOR(2),
+        CRITICAL(1),
+        UNKNOWN(0);
+        private final int value;
+        HealthState(int value){
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }
