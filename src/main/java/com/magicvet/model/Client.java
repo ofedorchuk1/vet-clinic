@@ -1,12 +1,17 @@
 package main.java.com.magicvet.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Client {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
     private String firstName;
     private String lastName;
     private String email;
     private Pet pet;
+    private final LocalDateTime registrationDate = LocalDateTime.now();
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -41,12 +46,13 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client {"
-                + "\n\tfirstName= " + firstName
-                + ". lastName = " + lastName
-                + ", email = " + email
-                + ",\n\tpet = " + pet
-                + "\n}";
+        return "Client{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", pet=" + pet +
+                ", registrationDate= " + registrationDate.format(FORMATTER) +
+                '}';
     }
 
     @Override
