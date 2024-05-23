@@ -57,7 +57,7 @@ public abstract class Pet {
     @Override
     public String toString() {
         return "Pet{" +
-                "type='" + type + '\'' +
+                "\n\ttype='" + type + '\'' +
                 ", sex='" + sex + '\'' +
                 ", age='" + age + '\'' +
                 ", name='" + name + '\'' +
