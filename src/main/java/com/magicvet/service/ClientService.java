@@ -48,7 +48,9 @@ public class ClientService {
             if (isNameValid(lastName)) System.out.print("Last name is invalid. Try again.\nLast name: ");
         } while (isNameValid(lastName));
         client.setLastName(lastName);
-
+        System.out.print("Location: ");
+        String location = Main.SCANNER.nextLine();
+        client.setLocation(Client.Location.valueOf(location));
         return client;
     }
 
