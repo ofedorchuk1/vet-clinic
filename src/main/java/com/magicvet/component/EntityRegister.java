@@ -2,7 +2,6 @@ package main.java.com.magicvet.component;
 
 import main.java.com.magicvet.Main;
 import main.java.com.magicvet.model.Client;
-import main.java.com.magicvet.model.Pet;
 import main.java.com.magicvet.service.ClientService;
 import main.java.com.magicvet.service.PetService;
 
@@ -28,17 +27,22 @@ public class EntityRegister {
         printClients(clientsByLocation);
     }
     private void printClients(Map<Client.Location, List<Client>> clientsByLocation){
-        for(Map.Entry<Client.Location, List<Client>> clients : clientsByLocation.entrySet()){
-            String content = "\nLocation: " + clients.getKey()
-                    + "\nClients (" + clients.getValue().size() + "):"
-                    + "\n\t" + clients.getValue();
-            System.out.println(content);
-        }
+        String content = clientsByLocation.entrySet().stream()
+                .map(entry -> "\nLocation: " + entry.getKey()
+                        + "\nClients (" + entry.getValue().size() + "):"
+                        + "\n\t" + entry.getValue())
+                .collect(Collectors.joining("\n"));
+        System.out.println(content);
     }
 
     private Optional<Client> addClient() {
         Optional<Client> client = clientService.registerNewClient();
-        client.ifPresent(this::registerPets);
+
+        client.ifPresent(c -> {
+            System.out.print("Do you want to add a pet? (y/n) ");
+            String answer = Main.SCANNER.nextLine();
+            if ("y".equals(answer)) registerPets(c);
+        });
 
         return client;
     }
@@ -55,12 +59,12 @@ public class EntityRegister {
     private void addPet(Client client){
         System.out.println("Adding a new pet.");
 
-        Pet pet = petService.registerNewPet();
-        if(pet != null) {
+        petService.registerNewPet().ifPresent(pet -> {
             client.addPet(pet);
             pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
             System.out.println("Pet has been added.");
-        }
+        });
+
     }
     private boolean verifyRepeating(String message){
         System.out.println(message);
